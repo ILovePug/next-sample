@@ -1,8 +1,14 @@
-import type { NextConfig } from "next";
+import { PHASE_PRODUCTION_SERVER } from 'next/constants';
 
-const nextConfig: NextConfig = {
-  /* config options here */
-   assetPrefix: process.env.ASSET_PREFIX || '',
-};
 
-export default nextConfig;
+export default (phase: string) => {
+
+  // only add for production runtime
+  const assetPrefix = phase === PHASE_PRODUCTION_SERVER ? '/myapp' : '';
+
+  console.log({assetPrefix});
+
+  return {
+    assetPrefix
+  };
+}
